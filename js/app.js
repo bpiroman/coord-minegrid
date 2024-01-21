@@ -1,27 +1,40 @@
-var refMgaX = 603.345302162739;
-var refMgaY = 2275.639508549100;
-var a1 = 0.999659643145;
-var b1 = 0.000051162911;
-
-// var Sx = 412396.182;
-// var Sy = 6323603.650;
-// coordMgaX = refMgaX+a1*Sx-b1*Sy;
-// coordMgaY = refMgaY+Sx*b1+Sy*a1;
-// console.log(coordMgaX.toFixed(3)+", "+coordMgaY.toFixed(3));
 
 function Site2Mga() {
-    var Sx = document.getElementById('coordx').valueAsNumber;
-    var Sy = document.getElementById('coordy').valueAsNumber;
-    coordMgaX = refMgaX+a1*Sx-b1*Sy;
-    coordMgaY = refMgaY+Sx*b1+Sy*a1;
-    var el = document.getElementById('result');
-    el.textContent = coordMgaX.toFixed(3) + ", " + coordMgaY.toFixed(3);
+    $('#resultMga').empty();
+
+    const refMgaX = 603.345302162739;
+    const refMgaY = 2275.639508549100;
+    const a1 = 0.999659643145;
+    const b1 = 0.000051162911;
+
+    const eastingGrid = $('#coordxGrid').val();
+    const northingGrid = $('#coordyGrid').val();
+
+    const coordMgaX = refMgaX + a1 * eastingGrid - b1 * northingGrid;
+    const coordMgaY = refMgaY + eastingGrid * b1 + northingGrid * a1;
+    const result = coordMgaX.toFixed(3) + ", " + coordMgaY.toFixed(3);
+
+    $('#resultMga').append(result);
 }
 
-// function calc() {
-//     var inputx = document.getElementById('coordx').valueAsNumber;
-//     var inputy = document.getElementById('coordy').valueAsNumber;
-//     var result = inputx*2 + inputy;
-//     var el = document.getElementById('result');
-//     el.textContent = "Result: " + result;
-// }
+$('#submitGridMga').on('click', Site2Mga);
+
+function mga2Site() {
+    $('#resultGrid').empty();
+
+    const refSiteX = -603.667188161735;
+    const refSiteY = -2276.382751966880;
+    const a1 = 1.000340470014;
+    const b1 = -0.000051197756;
+
+    const eastingMga = $('#coordxMga').val();
+    const northingMga = $('#coordyMga').val();
+
+    const coordGridX = refSiteX + a1 * eastingMga - b1 * northingMga;
+    const coordGridY = refSiteY + eastingMga * b1 + northingMga * a1;
+    const result = coordGridX.toFixed(3) + ", " + coordGridY.toFixed(3);
+
+    $('#resultGrid').append(result);
+}
+
+$('#submitMgaGrid').on('click', mga2Site);
