@@ -27,3 +27,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+hr {
+  border-top: 2px solid black;
+}
